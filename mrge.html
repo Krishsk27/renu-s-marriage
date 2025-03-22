@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>U.UDHAYA RAM KUMAR & V.RENUGAMBAL| Engagement Invitation</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.js"></script>
+  
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap.min.css">
+  
+  <!-- GSAP and ScrollTrigger for animations -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/ScrollTrigger.min.js"></script>
+  
+  <!-- Three.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --primary-color: #D4AF37; /* Gold */
+      --secondary-color: #8B0000; /* Deep Maroon */
+      --accent-color: #FFD700; /* Gold accent */
+      --background-color: #FFF8E1; /* Light cream */
+      --text-color: #4A2511; /* Dark brown */
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--background-color);
+      color: var(--text-color);
+      overflow-x: hidden;
+    }
+    
+    h1, h2, h3, h4, h5 {
+      font-family: 'Cormorant Garamond', serif;
+    }
+    
+    .parallax-section {
+      overflow: hidden;
+      position: relative;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .parallax-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+    
+    .kolam-pattern {
+      position: absolute;
+      opacity: 0.1;
+      width: 100%;
+      height: 100%;
+      background-image: url('/api/placeholder/800/800');
+      background-size: 300px;
+      background-repeat: repeat;
+    }
+    
+    .section {
+      min-height: 100vh;
+      padding: 80px 0;
+      position: relative;
+    }
+    
+    .gold-text {
+      color: var(--primary-color);
+    }
+    
+    .maroon-text {
+      color: var(--secondary-color);
+    }
+    
+    .gold-border {
+      border: 2px solid var(--primary-color);
+    }
+    
+    .section-title {
+      font-size: 3rem;
+      margin-bottom: 2rem;
+      position: relative;
+      display: inline-block;
+    }
+    
+    .section-title::after {
+      content: "";
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: var(--primary-color);
+    }
+    .floating-flower {
+  position: fixed;
+  top: -100px;
+  width: 50px;
+  opacity: 0.8;
+  transition: transform 0.2s ease-in-out;
+}
+
+    .fancy-border {
+      border: 5px solid var(--primary-color);
+      border-radius: 8px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      padding: 2rem;
+      background-color: rgba(255, 255, 255, 0.9);
+    }
+    
+    .timeline-item {
+      position: relative;
+      padding-left: 30px;
+      margin-bottom: 30px;
+    }
+    
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      background: var(--primary-color);
+    }
+    
+    .timeline-item::after {
+      content: "";
+      position: absolute;
+      left: 7px;
+      top: 15px;
+      width: 2px;
+      height: calc(100% + 15px);
+      background: var(--primary-color);
+    }
+    
+    .timeline-item:last-child::after {
+      display: none;
+    }
+    
+    .canvas-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+    
+    .scroll-down {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: bounce 2s infinite;
+      cursor: pointer;
+    }
+    
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0) translateX(-50%);
+      }
+      40% {
+        transform: translateY(-30px) translateX(-50%);
+      }
+      60% {
+        transform: translateY(-15px) translateX(-50%);
+      }
+    }
+    
+    .invitation-card {
+      max-width: 800px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 20px;
+      overflow: hidden;
+      transform-style: preserve-3d;
+      perspective: 1000px;
+    }
+    
+    .flower-decoration {
+      position: absolute;
+      width: 150px;
+      height: 150px;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      z-index: -1;
+    }
+    
+    .flower-1 {
+      top: 50px;
+      left: 50px;
+      background-image: url('/api/placeholder/150/150');
+    }
+    
+    .flower-2 {
+      bottom: 50px;
+      right: 50px;
+      background-image: url('/api/placeholder/150/150');
+    }
+    
+    /* Loader */
+    .loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--background-color);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      transition: opacity 0.5s ease;
+    }
+    
+    .loader-content {
+      text-align: center;
+    }
+    
+    .loader-kolam {
+      width: 100px;
+      height: 100px;
+      background-image: url('/api/placeholder/100/100');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      margin: 0 auto 20px;
+      animation: rotate 3s infinite linear;
+    }
+    
+    @keyframes rotate {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+    /* Responsive Styling */
+@media (max-width: 768px) {
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  .flower-decoration {
+    display: none; /* Hide decorations on small screens */
+  }
+
+  .canvas-container {
+    height: 300px !important; /* Limit Three.js canvas height */
+  }
+
+  .timeline-item {
+    text-align: center;
+    width: 90%;
+    margin: auto;
+  }
+
+  .rsvp-form {
+    width: 100%;
+    padding: 10px;
+  }
+}
+
+  </style>
+</head>
+<body>
+   
+      
+  <!-- Loader -->
+  <div class="loader" id="loader" style="background-image: url('loader.jpeg'); background-size: cover; background-position: center;">
+    <div class="loader-content">
+        <h2 class="gold-text">U.UDHAYA RAM KUMAR & V.RENUGAMBAL</h2>
+        <p class="invitation-text">Our Wedding Invitation...</p>
+    </div>
+</div>
+<!-- Header Image Section -->
+<div class="header-image-container">
+  <img src="flower.png" alt="Wedding Header Image" class="header-image">
+</div>
+
+<style>
+  .header-image-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    max-height: 300px; /* Adjust this height as needed */
+  }
+  
+  .header-image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+  
+  /* For mobile responsiveness */
+  @media (max-width: 768px) {
+    .header-image-container {
+      max-height: 200px; /* Smaller height on mobile */
+    }
+  }
+</style>
+
+<style>
+.loader {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: #f8e6b8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.loader-content {
+    text-align: center;
+}
+
+.loader-kolam img {
+    width: 120px;
+    height: 120px;
+}
+
+
+
+.gold-text {
+    font-size: 24px;
+    font-weight: bold;
+    color: #d4af37;
+    text-shadow: 2px 2px 10px rgba(255, 215, 0, 0.8);
+    animation: fadeIn 2s ease-in-out;
+}
+
+.invitation-text {
+    font-size: 18px;
+    color: #8b5e3b;
+    animation: fadeIn 3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+</style>
+
+
+
+    <!-- Hero Section -->
+    <section class="section" id="couple">
+      <div class="container">
+
+      <div class="container relative z-10">
+        <div class="fancy-border transform transition-transform duration-500 animate-fadeInUp max-w-lg mx-auto px-4">
+          <h5 class="text-xs sm:text-sm mb-2 gold-text font-semibold tracking-wider">With the blessings of our parents</h5>
+          <h2 class="text-3xl sm:text-5xl font-bold maroon-text tracking-wide drop-shadow-lg leading-tight">U.UDHAYARAMKUMAR 
+            <br>WEDS<br>
+            V.RENUGAMBAL
+          </h2>
+          <h3 class="text-base sm:text-lg mb-3 font-light text-gray-800">Request the honor of your presence at our Engagement...</h3>
+          <h2 class="text-lg sm:text-2xl gold-text font-semibold">Engagement On</h2>
+          <p class="text-base mt-3 font-medium">Sunday, March 30th, 2025 | 06:00 PM</p>
+          <p class="text-xs sm:text-sm mt-1">Abirami Mahal nearby Thirupurakundram, Poonga Stop.</p>
+    
+          <!-- Countdown Timer -->
+          <div class="countdown-container">
+            <div class="countdown">
+                <div class="time-box">
+                    <span id="days" class="time-value">00</span>
+                    <p class="time-label">Days</p>
+                </div>
+                <div class="time-box">
+                    <span id="hours" class="time-value">00</span>
+                    <p class="time-label">Hours</p>
+                </div>
+                <div class="time-box">
+                    <span id="minutes" class="time-value">00</span>
+                    <p class="time-label">Minutes</p>
+                </div>
+                <div class="time-box">
+                    <span id="seconds" class="time-value">00</span>
+                    <p class="time-label">Seconds</p>
+                </div>
+            </div>
+          </div>
+          <p id="countdown-message" class="hidden text-lg font-semibold mt-4 text-red-600">The wedding has begun! 🎉</p>
+        </div>
+      </div>
+    
+      <!-- Scroll Down Indicator -->
+      
+<br><br>
+  
+  <style>
+  /* Countdown Timer Styles */
+  .countdown-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      padding: 15px 0;
+      background: #fffaf0; /* Light traditional shade */
+  }
+  
+  .countdown {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+  }
+  
+  .time-box {
+      background: white;
+      padding: 10px;
+      border-radius: 12px;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+      border: 2px solid #d4af37;
+      width: 70px;
+      text-align: center;
+      transition: transform 0.3s ease-in-out;
+      animation: fadeInScale 1s ease-in-out;
+  }
+  
+  .time-box:hover {
+      transform: scale(1.05);
+  }
+  
+  .time-value {
+      font-size: 28px;
+      font-weight: bold;
+      color: #b8860b;
+      text-shadow: 1px 1px 6px rgba(255, 215, 0, 0.5);
+  }
+  
+  .time-label {
+      font-size: 10px;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: #5a3d2b;
+  }
+  
+  /* Mobile Optimization */
+  @media (max-width: 640px) {
+      .countdown {
+          gap: 6px;
+      }
+      .time-box {
+          width: 60px;
+          padding: 8px;
+      }
+      .time-value {
+          font-size: 24px;
+      }
+      .time-label {
+          font-size: 9px;
+      }
+  }
+  
+  /* Smooth Animation */
+  @keyframes fadeInScale {
+      from {
+          opacity: 0;
+          transform: scale(0.8);
+      }
+      to {
+          opacity: 1;
+          transform: scale(1);
+      }
+  }
+  </style>
+  
+  <!-- Countdown Timer Script -->
+  <script>
+    function startCountdown() {
+        const weddingDate = new Date("March 30,2025 18:00:00").getTime();
+  
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const timeLeft = weddingDate - now;
+  
+            if (timeLeft <= 0) {
+                document.querySelector(".countdown").style.display = "none";
+                document.getElementById("countdown-message").classList.remove("hidden");
+                return;
+            }
+  
+            const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+  
+            document.getElementById("days").textContent = days;
+            document.getElementById("hours").textContent = hours;
+            document.getElementById("minutes").textContent = minutes;
+            document.getElementById("seconds").textContent = seconds;
+        }
+  
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+    }
+  
+    document.addEventListener("DOMContentLoaded", startCountdown);
+  </script>
+  
+
+
+
+    <div class="container">
+      <h2 class="section-title text-center mb-10 maroon-text">Our Story</h2>
+      <div class="row">
+        <div class="col-md-5 mb-4 mb-md-0">
+          <div class="fancy-border text-center h-100">
+            <div class="image-wrapper mb-4">
+              <img src="GROOM.png" alt="Bride" class="rounded-full w-48 h-48 mx-auto object-cover">
+            </div>
+            <h3 class="text-2xl mb-2 gold-text">U.UDHAYARAMKUMAR
+              (D.T.ED, B.Lit, Tamil) </h3>
+            <p class="mb-4">SON of<br>
+            Mrs. & Mr.UDHAYAKUMAR</p>
+            <p>We humbly request your affectionate presence.</p>
+            <h4 class="text-2xl mb-2 gold-text">Mr.NANTHAKUMAR  & Mrs.PRIYA</h4>
+          </div>
+        </div>
+        <div class="col-md-5">
+          <div class="fancy-border text-center h-100">
+            <div class="image-wrapper mb-4">
+              <img src="COUPLE2.png" alt="Groom" class="rounded-full w-48 h-48 mx-auto object-cover">
+            </div>
+            <h3 class="text-2xl mb-2 gold-text">V.RENUGAMBAL(B.A - English Lite)</h3>
+            <p class="mb-4">DAUGHTER of<br>
+            Mrs. & Mr. VIJAY KUMAR
+            <p>We solicit your gracious presence. </p>
+            <h1 class="text-2xl mb-2 gold-text">Mr.BALASUBRAMANIAN  & Mrs.JEYALAKSHIMI,
+              B.SURESHKRISHNA & VEDHAVARSINI
+            </h1>
+          </div>
+        </div>
+      </div><br><br>
+      
+      <div class="mt-16 fancy-border">
+        <h3 class="text-2xl mb-4 text-center gold-text">Our Day</h3>
+        <div class="timeline">
+          <div class="timeline-item">
+            <h4 class="text-xl maroon-text">Engagement</h4>
+            <p>Two souls, two hearts, one promise for a lifetime.
+              With the blessings of our families,
+              We cordially invite you to our engagement ceremony
+              as we begin our journey of love and togetherness.</p>
+          </div>
+          <div class="timeline-item">
+            <h4 class="text-xl maroon-text">The Wedding</h4>
+            <p>"With the blessings of the Almighty and our beloved families,
+              we cordially invite you to celebrate the union of
+              U.UDHAYARAMKUMAR & V.RENUGAMBAL
+              as they embark on a beautiful journey of love and togetherness.
+              Please join us and grace the occasion with your presence."</p>
+          </div>
+        </div>
+      </div>
+    </div>
+<br><br>
+    <div class="container">
+      <h2 class="section-title text-center mb-10 maroon-text">Wedding Events</h2>
+      <div class="row">
+        <div class="col-md-6 mb-4">
+          <div class="fancy-border h-100">
+            <div class="event-icon text-center mb-3">
+              <img src="engagement.png" alt="Wedding" class="w-20 h-20 mx-auto">
+            </div>
+            <h3 class="text-2xl text-center mb-3 gold-text">Engagement</h3>
+            <div class="text-center mb-3">
+              <p class="font-semibold">March 30th, 2025</p>
+              <p>06:00 PM - 9:00 PM</p>
+              <p>Abirami Mahal nearby Thirupurakundram, Poonga Stop.</p>
+            </div>
+            <p>Join us for a celebratory reception with dinner, music, and blessings from all our loved ones.</p>
+          </div>
+        </div>
+        <div class="col-md-6 mb-4">
+          <div class="fancy-border h-100">
+            <div class="event-icon text-center mb-3 relative">
+              <img src="COUPLE.png" alt="Reception" class="w-20 h-20 sm:w-24 sm:h-24 mx-auto relative z-10">
+            </div>
+            
+            <h3 class="text-2xl text-center mb-3 gold-text">Wedding Ceremony</h3>
+            <div class="text-center mb-3">
+              <p class="font-semibold">April 04th, 2025</p>
+              <p>7:40 AM - 09:00 AM</p>
+              <p>Arulmigu Ellammal ThiruKovil, Malaipatti.</p>
+            </div>
+            <p>The most special day of our lives has arrived!
+              With hearts full of love and joy, we invite you to witness and bless
+              the sacred union of our marriage..</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <h2 class="section-title text-center mb-10 maroon-text">Venue</h2>
+      <div class="fancy-border">
+        <div class="row"><br>
+          <div class="col-md-6 mb-4 mb-md-0 flex justify-center">
+            <div class="flex justify-center items-center">
+              <a href="https://maps.app.goo.gl/djQjczh8Xwbt9VPB6" target="_blank">
+                <img src="qr.png" alt="Venue" class="w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 object-cover rounded">
+              </a>
+            </div><br>
+          
+          
+          <div class="col-md-6">
+            <h3 class="text-2xl mb-3 gold-text">Abirami Mahal</h3>
+            <p class="mb-4">Thirupurakundram, Poonga Stop<br>Tamil Nadu, India</p>
+            
+            <div>
+              <h4 class="text-xl mb-2 maroon-text">Accommodation</h4>
+              <p>We have arranged special rates at nearby hotels for our guests. Please contact us for details.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+
+  <!-- Footer Section -->
+  <footer class="py-5 text-center flex flex-col items-center" style="background-color: var(--secondary-color); color: white;">
+    <div class="container">
+      <h2 class="text-3xl mb-4" style="color: var(--primary-color);">B.SURESHKRISNA & VEDHAVARSINI</h2>
+      <p class="mb-4">We look forward to celebrating our Sister's special day with you!</p>
+      <p>#udhayaramkumar&renugambal2025</p>
+      <div class="flower-decoration flower-1"></div>
+      <div class="flower-decoration flower-2"></div>
+      <button id="scrollTopBtn" class="fixed bottom-5 right-5 bg-gray-800 text-white p-2 rounded-full shadow-lg hidden">
+        ↑
+      </button>
+      
+    </div>
+  </footer>
+
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    // Scroll-to-Top Button
+const scrollTopBtn = document.getElementById("scrollTopBtn");
+
+window.addEventListener("scroll", () => {
+  if (window.scrollY > 300) {
+    scrollTopBtn.classList.remove("hidden");
+  } else {
+    scrollTopBtn.classList.add("hidden");
+  }
+});
+
+scrollTopBtn.addEventListener("click", () => {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
+
+    // Wait for page to load
+    window.addEventListener('load', function() {
+      setTimeout(function() {
+        document.getElementById('loader').style.opacity = 0;
+        setTimeout(function() {
+          document.getElementById('loader').style.display = 'none';
+        }, 500);
+      }, 2000);
+    });
+    
+    // Countdown Timer
+    function updateCountdown() {
+      const weddingDate = new Date('June 15, 2025 10:00:00').getTime();
+      const now = new Date().getTime();
+      const distance = weddingDate - now;
+      
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      
+      const countdownEl = document.getElementById('countdown');
+if (window.innerWidth < 768) {
+  countdownEl.style.display = "grid";
+  countdownEl.style.gridTemplateColumns = "repeat(2, 1fr)";
+  countdownEl.style.gap = "10px";
+} else {
+  countdownEl.style.display = "flex";
+}
+
+      document.getElementById('hours').innerText = hours.toString().padStart(2, '0');
+      document.getElementById('minutes').innerText = minutes.toString().padStart(2, '0');
+      document.getElementById('seconds').innerText = seconds.toString().padStart(2, '0');
+    }
+    
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+    
+    // Scroll Down Button
+    document.getElementById('scrollDown').addEventListener('click', function() {
+      const coupleSection = document.getElementById('couple');
+      coupleSection.scrollIntoView({ behavior: 'smooth' });
+    });
+    
+    // Three.js Animation
+    function initThreeJS() {
+      // Scene setup
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+      camera.position.z = 5;
+      
+      // Create renderer
+      const renderer = new THREE.WebGLRenderer({ alpha: true });
+      const isMobile = window.innerWidth < 768;
+      renderer.setSize(window.innerWidth, isMobile ? 300 : window.innerHeight);
+      renderer.setClearColor(0x000000, 0);
+      
+      // Add renderer to page
+      const container = document.createElement('div');
+      container.classList.add('canvas-container');
+      document.getElementById('hero').appendChild(container);
+      container.appendChild(renderer.domElement);
+      
+      // Create particles
+      const particlesGeometry = new THREE.BufferGeometry();
+      const particleCount = 2000;
+      
+      const positions = new Float32Array(particleCount * 3);
+      const colors = new Float32Array(particleCount * 3);
+      
+      const colorChoices = [
+        0xD4AF37, // Gold
+        0x8B0000, // Maroon
+        0xFFA500, // Orange
+        0xFF69B4  // Pink
+      ];
+      
+      for (let i = 0; i < particleCount; i++) {
+        // Position
+        positions[i * 3] = (Math.random() - 0.5) * 20;
+        positions[i * 3 + 1] = (Math.random() - 0.5) * 20;
+        positions[i * 3 + 2] = (Math.random() - 0.5) * 20;
+        
+        // Color
+        const color = new THREE.Color(colorChoices[Math.floor(Math.random() * colorChoices.length)]);
+        colors[i * 3] = color.r;
+        colors[i * 3 + 1] = color.g;
+        colors[i * 3 + 2] = color.b;
+      }
+      
+      particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+      particlesGeometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+      
+      const particlesMaterial = new THREE.PointsMaterial({
+        size: 0.05,
+        vertexColors: true,
+        transparent: true,
+        opacity: 0.8
+      });
+      
+      const particles = new THREE.Points(particlesGeometry, particlesMaterial);
+      scene.add(particles);
+      
+      // Animation loop
+      function animate() {
+        requestAnimationFrame(animate);
+        
+        particles.rotation.y += 0.001;
+        particles.rotation.x += 0.0005;
+        
+        renderer.render(scene, camera);
+      }
+      
+      animate();
+      
+      // Handle resize
+      window.addEventListener('resize', function() {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+    }
+    
+    // Initialize Three.js after page load
+    window.addEventListener('load', initThreeJS);
+    
+    // GSAP ScrollTrigger Animations
+    document.addEventListener('DOMContentLoaded', function() {
+      // Register ScrollTrigger plugin
+      gsap.registerPlugin(ScrollTrigger);
+      
+      // Hero section animations
+      gsap.from(".fancy-border", {
+        opacity: 0,
+        y: 100,
+        duration: 1.5,
+        ease: "power3.out"
+      });
+      
+      // Timeline animations
+      gsap.from(".timeline-item", {
+        scrollTrigger: {
+          trigger: ".timeline",
+          start: "top 80%",
+          toggleActions: "play none none none"
+        },
+        opacity: 0,
+        x: -50,
+        stagger: 0.3,
+        duration: 0.8,
+        ease: "power1.out"
+      });
+      gsap.from("#hero h1", {
+  scrollTrigger: {
+    trigger: "#hero",
+    start: "top 60%",
+    end: "top 20%",
+    scrub: true
+  },
+  opacity: 0,
+  y: 50
+});
+gsap.to("#couple", {
+  scrollTrigger: {
+    trigger: "#couple",
+    start: "top bottom",
+    end: "top center",
+    scrub: true
+  },
+  backgroundPosition: "center top",
+  scale: 1.1
+});
+gsap.from(".timeline-item", {
+  scrollTrigger: {
+    trigger: ".timeline",
+    start: "top 80%",
+    toggleActions: "play none none none"
+  },
+  opacity: 0,
+  x: -50,
+  stagger: 0.3,
+  duration: 0.8,
+  ease: "power1.out"
+});
+document.querySelectorAll("#gallery img").forEach(img => {
+  gsap.from(img, {
+    scrollTrigger: {
+      trigger: img,
+      start: "top 90%",
+      toggleActions: "play none none none"
+    },
+    opacity: 0,
+    scale: 0.8,
+    duration: 0.5
+  });
+});
+gsap.to(".flower-decoration", {
+  scrollTrigger: {
+    trigger: "body",
+    start: "top 100%",
+    end: "bottom 0%",
+    scrub: true
+  },
+  y: -200,
+  ease: "linear"
+});
+
+
+      // Smooth Scrolling using ScrollJS
+document.querySelectorAll("a[href^='#']").forEach(anchor => {
+  anchor.addEventListener("click", function (e) {
+    e.preventDefault();
+    const targetId = this.getAttribute("href").substring(1);
+    const targetElement = document.getElementById(targetId);
+    if (targetElement) {
+      targetElement.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  });
+});
+
+      
+        // RSVP section animation
+  gsap.from(".rsvp-form", {
+    scrollTrigger: {
+      trigger: "#rsvp",
+      start: "top 80%",
+      toggleActions: "play none none none"
+    },
+    opacity: 0,
+    scale: 0.8,
+    duration: 1,
+    ease: "back.out(1.7)"
+  });
+  // Background Music Toggle
+const weddingMusic = document.getElementById("weddingMusic");
+const musicToggle = document.getElementById("musicToggle");
+
+musicToggle.addEventListener("click", () => {
+  if (weddingMusic.paused) {
+    weddingMusic.play();
+    musicToggle.textContent = "🔇";
+  } else {
+    weddingMusic.pause();
+    musicToggle.textContent = "🔊";
+  }
+});
+
+
+  // Gallery hover effect
+  document.querySelectorAll("#gallery img").forEach(img => {
+    if (window.innerWidth > 768) {
+  img.addEventListener("mouseenter", () => {
+    gsap.to(img, { scale: 1.1, duration: 0.3 });
+  });
+}
+
+    img.addEventListener("mouseleave", () => {
+      gsap.to(img, { scale: 1, duration: 0.3 });
+    });
+  });
+});
+// Floating Flowers Animation
+const flowerImages = ["flower1.png", "flower2.png", "flower3.png"];
+flowerImages.forEach(imgSrc => {
+  const img = document.createElement("img");
+  img.src = `assets/${imgSrc}`;
+  img.classList.add("floating-flower");
+  document.body.appendChild(img);
+});
+
+document.addEventListener("scroll", () => {
+  document.querySelectorAll(".floating-flower").forEach(img => {
+    img.style.transform = `translateY(${window.scrollY * 0.2}px)`;
+  });
+});
+
+</script>
+</body>
+</html>
